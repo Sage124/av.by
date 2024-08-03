@@ -1,0 +1,44 @@
+{% extends 'admin/base_site.html' %}
+
+{% block content %}
+    <style>
+        table tr:nth-child(even) {
+            background-color: transparent; /* Убираем выделение цветом в четных строках */
+        }
+    </style>
+
+    <div class="content">
+        <h1>Отправка сообщения в Telegram</h1>
+        <form method="post" action="{% url 'send_tg_message' %}">
+            {% csrf_token %}
+            <table>
+                <tr>
+                    <td>
+                        <label for="text">Текст:</label>
+                    </td>
+                    <td>
+                        <textarea name="text"
+                            id="text"
+                            rows="4"
+                            cols="50"
+                            placeholder="текст сообщения..."
+                        ></textarea>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label for="date">Отложить отправку до: </label>
+                    </td>
+                    <td>
+                        <input type="datetime-local" name="date" id="date">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <input type="submit" value="Отправить">
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </div>
+{% endblock %}
